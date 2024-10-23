@@ -78,7 +78,13 @@ if workspace:FindFirstChild("NoSpellZone") then
 	NoSpellZone2.Parent = game.Workspace
 end
 
+local fullbright = false
+
 Game:GetService("RunService").RenderStepped:Connect(function()
+
+    if fullbright then
+        game.Lighting.Ambient = Color3.fromRGB(170, 170, 170)
+    end
 
 	--for i, v in pairs(DungeonMobs) do
 	--print(v.Name)
@@ -418,10 +424,11 @@ local function Launch()
 		PremiumOnly = false
 	})
 
-	HomeTab:AddButton({
+	HomeTab:AddToggle({
 		Name = "Full Bright",
+        Default = false,
 		Callback = function(Value)
-			game.Lighting.Ambient = Color3.fromRGB(170, 170, 170)
+			fullbright = Value
 		end
 	})
 
@@ -455,6 +462,88 @@ local function Launch()
 		Icon = "",
 		PremiumOnly = false
 	})	
+
+    local TPTab = Window:MakeTab({
+		Name = "Teleports",
+		Icon = "",
+		PremiumOnly = false
+	})
+
+    TPTab:AddButton({
+        Name = "Dungeon",
+        Callback = function()
+            game.Players.LocalPlayer.Character.Head:Destroy()
+            local done = false
+            local c = game.Players.LocalPlayer.CharacterAdded:Connect(function()
+                if done == true then return end
+                done = true
+                wait(2)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6615.6708984375, 11835.3427734375, -631.3573608398438)
+                c:Disconnect()
+            end)
+        end
+    })
+
+    TPTab:AddButton({
+        Name = "Corvus",
+        Callback = function()
+            game.Players.LocalPlayer.Character.Head:Destroy()
+            local done = false
+            local c = game.Players.LocalPlayer.CharacterAdded:Connect(function()
+                if done == true then return end
+                done = true
+                wait(2)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6650.1455078125, 193.25091552734375, 1314.0185546875)
+                c:Disconnect()
+            end)
+        end
+    })
+
+    TPTab:AddButton({
+        Name = "Fang",
+        Callback = function()
+            game.Players.LocalPlayer.Character.Head:Destroy()
+            local done = false
+            local c = game.Players.LocalPlayer.CharacterAdded:Connect(function()
+                if done == true then return end
+                done = true
+                wait(2)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4229.9736328125, 75.20232391357422, -79.990478515625)
+                c:Disconnect()
+            end)
+        end
+    })
+
+    TPTab:AddButton({
+        Name = "Lumen Quest",
+        Callback = function()
+            game.Players.LocalPlayer.Character.Head:Destroy()
+            local done = false
+            local c = game.Players.LocalPlayer.CharacterAdded:Connect(function()
+                if done == true then return end
+                done = true
+                wait(2)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4171.7216796875, 201.63238525390625, -2440.251953125)
+                c:Disconnect()
+            end)
+        end
+    })
+
+    TPTab:AddButton({
+        Name = "Tournament",
+        Callback = function()
+            game.Players.LocalPlayer.Character.Head:Destroy()
+            local done = false
+            local c = game.Players.LocalPlayer.CharacterAdded:Connect(function()
+                if done == true then return end
+                done = true
+                wait(2)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2993.123779296875, 904.6279296875, 438.4173278808594)
+                c:Disconnect()
+            end)
+        end
+    })
+
 	local TestingTab = Window:MakeTab({
 		Name = "Sound Logger",
 		Icon = "",
@@ -463,14 +552,6 @@ local function Launch()
 
 	local UtilitySection = PlayerTab:AddSection({
 		Name = "Utility"
-	})
-
-    PlayerTab:AddToggle({
-		Name = "Anti-Terra Mea",
-		Default = false,
-		Callback = function(Value)
-			antimea = Value
-		end
 	})
 
 	PlayerTab:AddToggle({
